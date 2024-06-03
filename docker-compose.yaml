@@ -1,0 +1,17 @@
+services:
+  postgresql:
+    container_name: postgresql_student
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5460:5432"
+    restart: unless-stopped
+
+
+volumes:
+  postgres:
