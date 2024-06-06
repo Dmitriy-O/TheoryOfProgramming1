@@ -1,6 +1,7 @@
 package org.byovsiannikov.school.services;
 
 import lombok.RequiredArgsConstructor;
+import org.byovsiannikov.configserver.logger.behavoral.LoggerDefault;
 import org.byovsiannikov.configserver.logger.behavoral.LoggerSchool;
 import org.byovsiannikov.configserver.logger.creational.LoggerSingleton;
 import org.byovsiannikov.school.FullSchoolResponse;
@@ -21,19 +22,27 @@ public class SchoolServiceImpl implements SchoolService {
     private final StudentClient studentClient;
     private final SchoolConverter schoolConverter;
 
-    public void saveSchool (School school) {
-        schoolRepository.save(schoolConverter.fromDTO(school));
-        LoggerSingleton.getInstance().setLoggerStrategy(new LoggerSchool()).log("saved");
+    @Override
+    public void saveSchool(School school) {
+        SchoolEntity schoolEntity = schoolConverter.fromDTO(school);
+        schoolRepository.save(schoolEntity);
+        LoggerSingleton.getInstance().setLoggerStrategy(new LoggerSchool(new LoggerDefault())).log("saved");
     }
 
-    public List<SchoolEntity> getAllSchools () {
+    @Override
+    public List<SchoolEntity> getAllSchools() {
         return schoolRepository.findAll();
     }
 
-    public FullSchoolResponse findSchoolWithStudents (int schoolId) {
-        var schools = schoolRepository.findById(schoolId).orElse(SchoolEntity.builder().name("Not found").email("Not found").build());
+    @Override
+    public FullSchoolResponse findSchoolWithStudents(int schoolId) {
+        SchoolEntity school = schoolRepository.findById(schoolId)
+                .orElse(SchoolEntity.builder().name("Not found").email("Not found").build());
         var students = studentClient.findAllStudentsBySchool(schoolId);
-        return FullSchoolResponse.builder().name(schools.getName()).email(schools.getEmail()).students(students).build();
+        return FullSchoolResponse.builder()
+                .name(school.getName())
+                .email(school.getEmail())
+                .students(students)
+                .build();
     }
-
 }

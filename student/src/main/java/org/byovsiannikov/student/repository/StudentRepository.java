@@ -1,11 +1,11 @@
 package org.byovsiannikov.student.repository;
 
-import org.byovsiannikov.student.Student;
+import org.byovsiannikov.student.entity.StudentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface StudentRepository extends JpaRepository<Student, Integer> {
+public interface StudentRepository extends JpaRepository<StudentEntity, Integer> {
 
-    List<Student> findAllBySchoolId (int schoolId);
+    List<StudentEntity> findAllBySchoolId (int schoolId);
 }

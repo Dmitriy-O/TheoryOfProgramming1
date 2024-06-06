@@ -5,9 +5,7 @@ import org.byovsiannikov.school.dto.Student;
 
 import java.util.List;
 @Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class FullSchoolResponse {
     private String name;

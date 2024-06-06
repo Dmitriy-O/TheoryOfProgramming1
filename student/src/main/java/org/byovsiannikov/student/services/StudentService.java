@@ -1,27 +1,14 @@
 package org.byovsiannikov.student.services;
 
-import lombok.RequiredArgsConstructor;
-import org.byovsiannikov.student.Student;
-import org.byovsiannikov.student.repository.StudentRepository;
-import org.springframework.stereotype.Service;
+import org.byovsiannikov.student.dto.Student;
 
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
-public class StudentService {
+public interface StudentService {
 
-    private final StudentRepository studentRepository;
+    void saveStudent (Student student);
 
-    public void saveStudent (Student student) {
-        studentRepository.save(student);
-    }
+    List<Student> getAllStudents ();
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
-    }
-
-    public List<Student> findAllStudentsBySchool (int schoolId) {
-        return studentRepository.findAllBySchoolId(schoolId);
-    }
+    List<Student> findAllStudentsBySchool (int id);
 }

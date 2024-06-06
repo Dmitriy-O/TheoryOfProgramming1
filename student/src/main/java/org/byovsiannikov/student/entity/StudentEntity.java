@@ -1,4 +1,4 @@
-package org.byovsiannikov.student;
+package org.byovsiannikov.student.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Setter
-public class Student {
+public class StudentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Dmytro-O
       changes:
         - createTable:
-            tableName: student-entity
+            tableName: student_entity
             columns:
               - column:
                   name: id

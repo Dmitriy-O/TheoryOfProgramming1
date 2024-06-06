@@ -7,22 +7,25 @@ public class LoggerSingleton {
     private static LoggerSingleton instance;
     private LoggerStrategy loggerStrategy;
 
-    private LoggerSingleton () {}
+    private LoggerSingleton() {}
 
-    public static LoggerSingleton getInstance () {
+    public static LoggerSingleton getInstance() {
         if (instance == null) {
             instance = new LoggerSingleton();
         }
         return instance;
     }
 
-    public LoggerSingleton setLoggerStrategy (LoggerStrategy strategy) {
+    public LoggerSingleton setLoggerStrategy(LoggerStrategy strategy) {
         this.loggerStrategy = strategy;
-        return instance;
+        return this;
     }
 
-    public void log (String message) {
-        loggerStrategy.log(message);
+    public void log(String message) {
+        if (loggerStrategy != null) {
+            loggerStrategy.log(message);
+        } else {
+            throw new IllegalStateException("Logger strategy not set");
+        }
     }
-
 }
