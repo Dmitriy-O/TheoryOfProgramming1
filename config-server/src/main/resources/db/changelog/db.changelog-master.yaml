@@ -3,4 +3,3 @@ databaseChangeLog:
       file: db/changelog/changeset/createStudent.yaml
   - include:
       file: db/changelog/changeset/createSchool.yaml
-#      db/changelog/changeset/createStudent.yaml
