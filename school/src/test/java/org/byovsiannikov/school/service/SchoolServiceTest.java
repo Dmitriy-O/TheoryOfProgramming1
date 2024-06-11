@@ -8,11 +8,11 @@ import org.byovsiannikov.school.entity.SchoolEntity;
 import org.byovsiannikov.school.repository.SchoolRepository;
 import org.byovsiannikov.school.services.SchoolServiceImpl;
 import org.byovsiannikov.school.student.StudentClient;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
-
+import org.mockito.MockitoAnnotations;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +20,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
-@SpringBootTest
 public class SchoolServiceTest {
 
     @Mock
@@ -36,6 +35,10 @@ public class SchoolServiceTest {
     private SchoolServiceImpl schoolService;
 
 
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
     @Test
     public void testSaveSchool() {
         School school = new School();
@@ -47,8 +50,6 @@ public class SchoolServiceTest {
 
         verify(schoolRepository, times(1)).save(schoolEntity);
         verify(schoolConverter, times(1)).fromDTO(school);
-        // Assuming logger strategy and log method calls are part of the logic
-        // This is simplified for illustration purposes.
     }
 
     @Test
